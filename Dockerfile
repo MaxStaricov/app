@@ -7,7 +7,8 @@ COPY . .
 RUN dotnet publish -c Release -o /bin
 
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
-RUN adduser -D -u 1000 AspApp
+# RUN adduser -D -u 1000 AspApp
+RUN addgroup -S aspgroup && adduser -S AspApp -G aspgroup
 USER AspApp
 LABEL maintainer="Max"
 WORKDIR /release
