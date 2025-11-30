@@ -13,18 +13,3 @@ app.MapGet("/echo/{message}", (string message) =>
 });
 
 app.Run();
-
-
-
-
-
-var mmf = MemoryMappedFile.CreateOrOpen("heartbeat", 1);
-_ = Task.Run(async () =>
-{
-    while (true)
-    {
-        using var accessor = mmf.CreateViewAccessor();
-        accessor.Write(0, (byte)1);
-        await Task.Delay(10000);
-    }
-});
