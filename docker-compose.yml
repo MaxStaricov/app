@@ -15,4 +15,5 @@ services:
     #   timeout: 10s
     #   retries: 5
     #   start_period: 10s
-    
+  db:
+    image: postgres:15-alpine
