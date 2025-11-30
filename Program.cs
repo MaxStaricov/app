@@ -1,8 +1,9 @@
+var PORT = Environment.GetEnvironmentVariable("PORT") ?? "80";
+
 var builder = WebApplication.CreateBuilder(args);
+builder.WebHost.UseUrls($"http://0.0.0.0:{PORT}");
 var app = builder.Build();
 
-
-builder.WebHost.UseUrls("http://0.0.0.0:80");
 
 app.MapGet("/echo/{message}", (string message) =>
 {
