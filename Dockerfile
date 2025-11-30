@@ -1,13 +1,12 @@
-
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
-LABEL MAINTAINER = "Стариков Максим, 89049946851"
 WORKDIR /app
 COPY *.csproj ./
 RUN dotnet restore
 COPY . ./
-RUN dotnet publish -c Release -o out
+RUN dotnet publish -c Release -o Release
 
-FROM mcr.microsoft.com/dotnet/aspnet:9.0
+FROM mcr.microsoft.com/dotnet/sdk:9.0
 WORKDIR /app
-COPY --from=build /app/out ./
-ENTRYPOINT ["dotnet", "app.dll"]
+COPY --from=build /app/Release ./
+LABEL MAINTAINER = "Стариков Максим, 89049946851"
+ENTRYPOINT [ "dotnet", "app.dll" ]
