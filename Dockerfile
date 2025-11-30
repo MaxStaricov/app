@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS compile
 ENV APP_VERSION=2.0
-WORKDIR /src
+WORKDIR /app
 COPY *.csproj .
 RUN dotnet restore
 COPY . .
