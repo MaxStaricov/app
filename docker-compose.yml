@@ -2,10 +2,11 @@ version: "3.9"
 
 services:
   app:
-    # image: app:latest
-    build: .
+    image: app:latest
+    # build: .
     ports:
-      - "127.0.0.1:8080:5000"
+      # - "127.0.0.1:8080:5000"
+      - "8080:5000"
     environment:
       DB_HOST: db
       DB_PORT: 5432
