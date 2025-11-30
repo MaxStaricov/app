@@ -1,16 +1,30 @@
+using System.IO.MemoryMappedFiles;
+using System.Reflection.Metadata.Ecma335;
+
 var PORT = Environment.GetEnvironmentVariable("PORT") ?? "80";
 
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.UseUrls($"http://0.0.0.0:{PORT}");
 var app = builder.Build();
 
-
 app.MapGet("/echo/{message}", (string message) =>
 {
     return Results.Json(new { echo = message });
 });
 
- app.MapGet("/health", () => Results.Ok("OK"));
-
-
 app.Run();
+
+
+
+
+
+var mmf = MemoryMappedFile.CreateOrOpen("heartbeat", 1);
+_ = Task.Run(async () =>
+{
+    while (true)
+    {
+        using var accessor = mmf.CreateViewAccessor();
+        accessor.Write(0, (byte)1);
+        await Task.Delay(10000);
+    }
+});
