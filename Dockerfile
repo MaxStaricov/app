@@ -9,6 +9,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0
 LABEL MAINTAINER = "Стариков Максим, 89049946851"
 ENV PORT=80
 ENV APP_VERSION=1.0
+USER app
 WORKDIR /app
 COPY --from=build /app/Release ./
 ENTRYPOINT [ "dotnet", "app.dll" ]
