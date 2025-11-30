@@ -15,7 +15,7 @@ var connectionString = $"Host={dbHost};Port={dbPort};Database={dbName};Username=
 
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString(connectionString))
+    options.UseNpgsql(connectionString)
         .UseSnakeCaseNamingConvention());
 
 builder.Services.Configure<JsonOptions>(opt =>
