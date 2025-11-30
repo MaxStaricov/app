@@ -31,6 +31,22 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IEventService, EventService>();
 var app = builder.Build();
 
+
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+    db.Database.Migrate();
+
+    if (!db.Users.Any())
+    {
+        db.Users.Add(new User { Name = "Max", Email = "max@example.com" });
+        db.SaveChanges();
+    }
+}
+
+
 app.UseSwagger();
 app.UseSwaggerUI();
 
