@@ -1,0 +1,43 @@
+# version: "3.9"
+
+
+# services:
+#   app:
+#     build: .
+#     depends_on:
+#       - db
+#     environment:
+#       DB_HOST: db
+#       DB_PORT: 5432
+#       ASPNETCORE_ENVIRONMENT: "Production"
+#     ports:
+#       - "127.0.0.1:8080:80"
+
+#   db:
+#     image: postgres:16-alpine
+#     environment:
+#       POSTGRES_DB: lists_module
+#       POSTGRES_USER: postgres
+#       POSTGRES_PASSWORD: postgres
+#     volumes:
+#       - pgdata:/var/lib/postgresql/data
+
+# volumes:
+#   pgdata:
+
+
+
+
+# #!/bin/sh
+# set -e
+
+# echo "⏳ Waiting for PostgreSQL..."
+# until nc -z "$DB_HOST" "$DB_PORT"; do
+#   sleep 1
+# done
+
+# echo "🚀 Applying EF Core migrations..."
+# dotnet ef database update
+
+# echo "✔ Starting ASP.NET Core app"
+# exec dotnet AspApp.dll
