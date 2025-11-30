@@ -29,21 +29,16 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IEventService, EventService>();
+
 var app = builder.Build();
 
-
+// app.Urls.Add("http://0.0.0.0:5000");
 
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
     db.Database.Migrate();
-
-    if (!db.Users.Any())
-    {
-        db.Users.Add(new User { Name = "Max", Email = "max@example.com" });
-        db.SaveChanges();
-    }
 }
 
 
@@ -52,4 +47,4 @@ app.UseSwaggerUI();
 
 app.MapControllers();
 
-app.Run();
+app.Run("http://0.0.0.0:5000");
