@@ -7,11 +7,9 @@ COPY . .
 RUN dotnet publish -c Release -o /bin
 
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
-RUN addgroup --system aspgroup \
- && adduser --system --ingroup aspgroup AspApp
-
-USER AspApp
 LABEL maintainer="Max"
 WORKDIR /release
 COPY --from=compile /bin .
+RUN useradd -m aspapp
+USER aspapp
 ENTRYPOINT [ "dotnet", "AspApp.dll" ]
