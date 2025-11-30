@@ -8,9 +8,11 @@ services:
       - "127.0.0.1:8080:80"
     environment:
       - PORT=80
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
-      interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 10s
+    restart: on-failure:3
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+    #   interval: 10s
+    #   timeout: 10s
+    #   retries: 5
+    #   start_period: 10s
+    
