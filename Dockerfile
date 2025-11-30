@@ -4,7 +4,7 @@ WORKDIR /src
 COPY *.csproj .
 RUN dotnet restore
 COPY . .
-RUN dotnet publish -c Release -o /bin /p:UseAppHost=false
+RUN dotnet publish -c Release -o /bin
 
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
 USER AspApp
