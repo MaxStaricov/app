@@ -10,4 +10,7 @@ app.MapGet("/echo/{message}", (string message) =>
     return Results.Json(new { echo = message });
 });
 
+ app.MapGet("/health", () => Results.Ok("OK"));
+
+
 app.Run();
