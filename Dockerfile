@@ -5,6 +5,7 @@ COPY *.csproj .
 RUN dotnet restore
 COPY . .
 RUN dotnet publish -c Release -o /bin
+RUN apk add --no-cache curl
 
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
 LABEL maintainer="Max"
