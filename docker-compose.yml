@@ -45,6 +45,7 @@ services:
       - db_data:/var/lib/postgresql/data
     networks:
       - internal_network
+    cpus: 1.0
 
 volumes:
   db_data:
