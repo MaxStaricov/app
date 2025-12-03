@@ -1,15 +1,16 @@
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS compile
 ENV APP_VERSION=2.0
-WORKDIR /app
+WORKDIR /src
 COPY *.csproj .
 RUN dotnet restore
 COPY . .
 RUN dotnet publish -c Release -o /bin
-RUN apk add --no-cache curl
 
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
 LABEL maintainer="Max"
-WORKDIR /release
+WORKDIR /curl
+RUN apt-get install curl
+WORKDIR /bin
 COPY --from=compile /bin .
 RUN useradd -m aspapp
 USER aspapp
