@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   app:
-    image: app:latest
+    image: app:curl
     ports:
       - "127.0.0.1:8080:5000"
     environment:
