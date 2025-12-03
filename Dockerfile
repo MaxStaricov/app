@@ -9,7 +9,7 @@ RUN dotnet publish -c Release -o /bin
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
 LABEL maintainer="Max"
 WORKDIR /curl
-RUN apt-get install curl
+RUN apt-get update && apt-get install -y curl
 WORKDIR /bin
 COPY --from=compile /bin .
 RUN useradd -m aspapp
