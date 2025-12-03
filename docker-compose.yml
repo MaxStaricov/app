@@ -3,10 +3,8 @@ version: "3.9"
 services:
   app:
     image: app:latest
-    # build: .
     ports:
       - "127.0.0.1:8080:5000"
-      # - "8080:5000"
     environment:
       DB_HOST: db
       DB_PORT: 5432
@@ -14,7 +12,8 @@ services:
       DB_PASSWORD: postgres
       DB_NAME: postgres
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   db:
     image: postgres:15-alpine
@@ -24,8 +23,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "aspapp"]
-      interval: 1m30s
-      timeout: 30s
-      retries: 5
-      start_period: 30s
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
