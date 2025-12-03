@@ -117,3 +117,4 @@ docker-compose.override.yml
 node_modules/
 
 # End of file
+.config
