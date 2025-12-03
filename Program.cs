@@ -32,7 +32,7 @@ builder.Services.AddScoped<IEventService, EventService>();
 
 var app = builder.Build();
 
-// app.Urls.Add("http://0.0.0.0:5000");
+app.Urls.Add("http://0.0.0.0:5000");
 
 using (var scope = app.Services.CreateScope())
 {
