@@ -47,5 +47,8 @@ app.UseSwaggerUI();
 
 app.MapControllers();
 
+
+app.MapGet("/health", () => Results.Ok());
+
 app.Run();
 // app.Run("http://0.0.0.0:5000");
