@@ -7,7 +7,7 @@ services:
     ports:
       - "127.0.0.1:8080:5000"
     environment:
-      DB_HOST: db
+      DB_HOST: database_host
       DB_PORT: 5432
       DB_USER: postgres
       DB_PASSWORD: postgres
@@ -26,6 +26,7 @@ services:
   db:
     container_name: db
     image: postgres:alpine
+    hostname: database_host
     restart: always
     environment:
       POSTGRES_USER: postgres
